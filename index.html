@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>韻見庫存入口</title>
+    <style>
+      :root {
+        --ink: #111111;
+        --muted: #626262;
+        --line: #d8d8d8;
+        --paper: #ffffff;
+        --canvas: #f5f6f2;
+        --gold: #ffe9a6;
+        --accent: #1d6f7a;
+        --accent-soft: #dff1f3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.74)),
+          repeating-linear-gradient(0deg, transparent 0, transparent 31px, rgba(0, 0, 0, 0.05) 32px),
+          repeating-linear-gradient(90deg, transparent 0, transparent 119px, rgba(0, 0, 0, 0.05) 120px),
+          var(--canvas);
+        color: var(--ink);
+        font-family: Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      }
+
+      main {
+        display: grid;
+        width: min(680px, calc(100vw - 28px));
+        min-height: 100vh;
+        margin: 0 auto;
+        align-items: center;
+        padding: 28px 0;
+      }
+
+      .panel {
+        width: 100%;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        box-shadow: 0 18px 45px rgba(16, 16, 16, 0.08);
+      }
+
+      .title {
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-weight: 800;
+        line-height: 1.5;
+      }
+
+      .notice {
+        display: grid;
+        gap: 7px;
+        margin: 16px 0;
+        padding: 13px 14px;
+        border-radius: 8px;
+        background: var(--gold);
+        line-height: 1.5;
+      }
+
+      .notice strong {
+        font-size: 16px;
+      }
+
+      .actions {
+        display: grid;
+        gap: 12px;
+      }
+
+      .entry-link {
+        display: grid;
+        gap: 6px;
+        min-height: 76px;
+        align-content: center;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .entry-link strong {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .entry-link span {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .primary span,
+      .dark span {
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      .dark {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: #ffffff;
+      }
+
+      .secondary {
+        border-color: var(--accent);
+        background: #ffffff;
+      }
+
+      .footer {
+        margin-top: 14px;
+        padding: 12px;
+        border-radius: 8px;
+        background: var(--accent-soft);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 480px) {
+        main {
+          width: min(100vw - 20px, 680px);
+          align-items: start;
+          padding-top: 18px;
+        }
+
+        .panel {
+          padding: 16px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .entry-link strong {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel" aria-labelledby="entryTitle">
+        <div class="title">
+          <h1 id="entryTitle">韻見庫存入口</h1>
+          <p>這是公開入口頁。先選方式，下一步才決定要走 Wi-Fi、GPT 登入或只讀查看。</p>
+        </div>
+
+        <div class="notice">
+          <strong>這個網址本身不用 GPT，也不用同 Wi-Fi。</strong>
+          <span>真正進庫存時，Wi-Fi 功能仍需要手機跟店內電腦在同一個 Wi-Fi。</span>
+        </div>
+
+        <div class="actions">
+          <a class="entry-link primary" href="http://192.168.31.157:3000/inventory/index.html?entry=wifi">
+            <strong>同 Wi-Fi 編輯庫存</strong>
+            <span>店內手機、平板、電腦共用；需要庫存主機開著。</span>
+          </a>
+
+          <a
+            class="entry-link dark"
+            href="https://yunjian-inventory.timesight-tw.chatgpt-team.site/inventory/index.html?entry=gpt"
+          >
+            <strong>GPT 登入編輯</strong>
+            <span>使用正式 GPT Sites 網址，會先要求 OpenAI / ChatGPT 登入。</span>
+          </a>
+
+          <a class="entry-link secondary" href="http://192.168.31.157:3000/inventory/index.html?readonly=1">
+            <strong>免登入庫存查看</strong>
+            <span>不用改庫存，只看庫存數量；目前走店內同 Wi-Fi 只讀入口。</span>
+          </a>
+        </div>
+
+        <div class="footer">
+          如果你之後有自己的網域，可以把這一頁放到自己的網域首頁，例如 inventory.example.com。
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

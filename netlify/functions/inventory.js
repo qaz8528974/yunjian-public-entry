@@ -8,7 +8,7 @@ function getInventoryStore() {
   const token = process.env.NETLIFY_AUTH_TOKEN || process.env.NETLIFY_TOKEN;
 
   if (siteID && token) {
-    return getStore(STORE_NAME, { siteID, token });
+    return getStore({ name: STORE_NAME, siteID, token });
   }
 
   return getStore(STORE_NAME);

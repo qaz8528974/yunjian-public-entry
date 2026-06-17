@@ -3,6 +3,17 @@ const { getStore } = require("@netlify/blobs");
 const STORE_NAME = "yunjian-inventory";
 const STATE_KEY = "state";
 
+function getInventoryStore() {
+  const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID;
+  const token = process.env.NETLIFY_AUTH_TOKEN || process.env.NETLIFY_TOKEN;
+
+  if (siteID && token) {
+    return getStore(STORE_NAME, { siteID, token });
+  }
+
+  return getStore(STORE_NAME);
+}
+
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": "*",
@@ -43,7 +54,16 @@ exports.handler = async (event) => {
     return { statusCode: 204, headers: corsHeaders(), body: "" };
   }
 
-  const store = getStore(STORE_NAME);
+  let store;
+  try {
+    store = getInventoryStore();
+  } catch (error) {
+    return json(500, {
+      error: "Netlify Blobs 尚未設定完成",
+      detail: error.message,
+      need: ["NETLIFY_SITE_ID", "NETLIFY_AUTH_TOKEN"],
+    });
+  }
 
   if (event.httpMethod === "GET") {
     const state = await store.get(STATE_KEY, { type: "json" });

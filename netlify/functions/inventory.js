@@ -11,7 +11,7 @@ function getInventoryStore() {
     return getStore({ name: STORE_NAME, siteID, token });
   }
 
-  return getStore(STORE_NAME);
+  return getStore({ name: STORE_NAME, siteID, token });
 }
 
 function corsHeaders() {
